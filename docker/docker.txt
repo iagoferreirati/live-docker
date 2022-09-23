@@ -1,0 +1,121 @@
+Visão geral do Docker
+
+O Docker é uma plataforma aberta para desenvolvimento, envio e execução de aplicativos. 
+O Docker permite que você separe seus aplicativos de sua infraestrutura para que você possa entregar software rapidamente. 
+Com o Docker, você pode gerenciar sua infraestrutura da mesma forma que gerencia seus aplicativos. 
+Ao aproveitar as metodologias do Docker para enviar, testar e implantar código rapidamente, você pode reduzir significativamente o atraso entre escrever o código e executá-lo na produção.
+
+
+
+A plataforma Docker
+- O Docker fornece a capacidade de empacotar e executar um aplicativo em um ambiente levemente isolado chamado contêiner.
+- O isolamento e a segurança permitem que você execute vários contêineres simultaneamente em um determinado host.
+- Os contêineres são leves e contêm tudo o que é necessário para executar o aplicativo, portanto, você não precisa depender do que está instalado no host.
+- Você pode compartilhar contêineres facilmente enquanto trabalha e garantir que todos com quem você compartilha obtenham o mesmo contêiner que funciona da mesma maneira.
+
+O Docker fornece ferramentas e uma plataforma para gerenciar o ciclo de vida de seus contêineres:
+
+- Desenvolva seu aplicativo e seus componentes de suporte usando contêineres.
+- O contêiner se torna a unidade para distribuir e testar seu aplicativo.
+- Quando estiver pronto, implante seu aplicativo em seu ambiente de produção, como um contêiner ou um serviço orquestrado. Isso funciona da mesma forma se seu ambiente de produção for um data center local, um provedor de nuvem ou um híbrido dos dois.
+
+
+
+
+Para que posso usar o Docker? 
+- Entrega rápida e consistente de seus aplicativos
+- O Docker simplifica o ciclo de vida de desenvolvimento, permitindo que os desenvolvedores trabalhem em ambientes padronizados usando contêineres locais que fornecem seus aplicativos e serviços. 
+- Os contêineres são ótimos para fluxos de trabalho de integração contínua e entrega contínua (CI/CD).
+
+- A plataforma baseada em contêiner do Docker permite cargas de trabalho altamente portáteis. Os contêineres do Docker podem ser executados no laptop local de um desenvolvedor, em máquinas físicas ou virtuais em um data center, em provedores de nuvem ou em uma mistura de ambientes.
+
+- A portabilidade e a natureza leve do Docker também facilitam o gerenciamento dinâmico de cargas de trabalho, aumentando ou reduzindo aplicativos e serviços conforme as necessidades de negócios ditam, quase em tempo real.
+
+
+Executando mais cargas de trabalho no mesmo hardware
+- O Docker é leve e rápido. Ele fornece uma alternativa viável e econômica para máquinas virtuais baseadas em hipervisor, para que você possa usar mais sua capacidade de computação para atingir suas metas de negócios. O Docker é perfeito para ambientes de alta densidade e para implantações pequenas e médias onde você precisa fazer mais com menos recursos.
+
+
+
+Arquitetura Docker 
+- O Docker usa uma arquitetura cliente-servidor.
+- O cliente Docker conversa com o daemon do Docker , que faz o trabalho pesado de construir, executar e distribuir seus contêineres Docker. 
+- O cliente e o daemon do Docker podem ser executados no mesmo sistema ou você pode conectar um cliente do Docker a um daemon remoto do Docker. 
+- O cliente Docker e o daemon se comunicam usando uma API REST, em soquetes UNIX ou uma interface de rede. 
+- Outro cliente do Docker é o Docker Compose, que permite trabalhar com aplicativos que consistem em um conjunto de contêineres.
+
+
+
+
+Docker daemon
+O daemon do Docker escuta as solicitações da API do Docker e gerencia objetos do Docker, como imagens, contêineres, redes e volumes.
+
+Docker client
+O cliente Docker é a principal maneira pela qual  usuários interagem com o Docker. Quando você usa comandos como docker run, o cliente envia esses comandos para Docker daemon, que os executa.
+
+Docker registries
+Um registry do Docker armazena imagens do Docker. O Docker Hub é um registro público que qualquer pessoa pode usar, e o Docker está configurado para procurar imagens no Docker Hub por padrão. Você pode até mesmo executar seu próprio registro privado.
+
+Images
+Uma imagem é um modelo somente leitura com instruções para criar um contêiner do Docker. Muitas vezes, uma imagem é baseada em outra imagem, com alguma personalização adicional. Por exemplo, você pode construir uma imagem baseada na ubuntu imagem, mas instala o servidor web Apache e seu aplicativo, bem como os detalhes de configuração necessários para executar seu aplicativo.
+Para construir sua própria imagem, você cria um Dockerfile com uma sintaxe simples para definir as etapas necessárias para criar a imagem e executá-la.
+
+Containers
+Um contêiner é uma instância executável de uma imagem. Você pode criar, iniciar, parar, mover ou excluir um contêiner usando a API ou CLI do Docker.
+Por padrão, um contêiner é bem isolado de outros contêineres e de sua máquina host. Você pode controlar o quanto a rede, o armazenamento ou outros subsistemas subjacentes de um contêiner estão isolados de outros contêineres ou da máquina host.
+
+Um contêiner é definido por sua imagem, bem como por quaisquer opções de configuração que você fornece a ele ao criá-lo ou iniciá-lo. Quando um contêiner é removido, todas as alterações em seu estado que não são armazenadas no armazenamento persistente desaparecem.
+
+
+
+Comando de exemplo
+O comando a seguir executa um ubuntucontêiner, anexa interativamente à sua sessão de linha de comando local e executa o /bin/bash
+
+docker run -i -t ubuntu /bin/bash
+
+Quando você executa esse comando, acontece o seguinte:
+
+Se você não tiver a imagem do ubuntu localmente, o Docker a extrairá do registro configurado, como se você tivesse executado docker pull ubuntu manualmente.
+
+O Docker inicia o contêiner e executa o /bin/bash. Como o contêiner está sendo executado interativamente e conectado ao seu terminal (devido aos sinalizadores -i e -t ), você pode fornecer entrada usando o teclado enquanto a saída é registrada em seu terminal.
+
+
+
+O Docker é escrito na linguagem de programação Go e aproveita vários recursos do kernel do Linux para fornecer sua funcionalidade.
+
+
+
+
+
+
+Instalação do docker
+
+Desinstale versões antigas 
+    sudo apt -y remove docker docker-engine docker.io containerd runc
+
+Configurar o repositório
+Atualize o aptíndice de pacotes e instale pacotes para permitir apto uso de um repositório por HTTPS:
+    sudo apt update
+    sudo apt -y install ca-certificates curl gnupg lsb-release
+
+Adicione a chave GPG oficial do Docker:
+    sudo mkdir -p /etc/apt/keyrings
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+Use o seguinte comando para configurar o repositório:
+    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+
+Instalar o Engine Docker
+    sudo apt update
+    sudo apt -y install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+
+Gerencie o Docker como um usuário não root
+    sudo groupadd docker
+    sudo usermod -aG docker $USER
+    newgrp docker
+
+
+
+Verifique se o Docker Engine está instalado corretamente executando a hello-world imagem.
+    docker run hello-world

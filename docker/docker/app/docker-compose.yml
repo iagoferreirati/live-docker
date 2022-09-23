@@ -1,0 +1,13 @@
+services:
+  web:
+    image: iagomauricio/nginx-01
+    container_name: "nginx-compose"
+    ports:
+      - "8081:80"
+    volumes:
+      - "./html:/usr/share/nginx/html"
+
+  redis:
+    image: redis      
+    ports:
+      - "6379:6379"

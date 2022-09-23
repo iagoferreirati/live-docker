@@ -1,0 +1,35 @@
+Listar images
+docker image ls
+
+Baixar uma imagem
+docker image pull nome-da-imagem
+
+Remover uma imagem
+docker image rm id-da-imagem
+__________________________________________________
+Criando uma imagem personalizada
+
+O Docker pode criar imagens automaticamente lendo as instruções de um arquivo Dockerfile. A Dockerfile é um documento de texto que contém todos os comandos que um usuário pode chamar na linha de comando para montar uma imagem. O uso docker build pode criar uma compilação automatizada que executa várias instruções de linha de comando em sucessão.
+
+Exemplo de Dockerfile
+FROM nginx
+COPY static-html-directory /usr/share/nginx/html
+
+
+
+Build imgaem a partir de um Dockerfile
+docker image build . -t nginx-01
+__________________________________________________
+Docker Hub
+    1 - Gerar token no github
+        Token: dckr_pat_yBuNSx6FPQA63IIfaSP4s4OxVP4
+        Login: iagomauricio
+    docker login -u iagomauricio
+
+taguendo a imagem
+docker image tag nginx-01 iagomauricio/nginx-test-01
+
+
+Enviar imagem para o registry
+ docker image push iagomauricio/nginx-test-01
+

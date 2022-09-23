@@ -1,0 +1,33 @@
+O Compose é uma ferramenta para definir e executar aplicativos Docker de vários contêineres. Com o Compose, você usa um arquivo YAML para configurar os serviços do seu aplicativo. Então, com um único comando, você cria e inicia todos os serviços da sua configuração.
+
+
+Usar o Compose é basicamente um processo de três etapas:
+Defina o ambiente do seu aplicativo com um Dockerfile para que ele possa ser reproduzido em qualquer lugar.
+Defina os serviços que compõem seu aplicativo docker-compose.yml para que possam ser executados juntos em um ambiente isolado.
+Execute docker compose up e o comando do Docker inicia e executa todo o seu aplicativo.
+
+
+Crie um arquivo chamado docker-compose.yml no diretório do seu projeto e cole o seguinte:
+docker-compose.yml
+
+services:
+  web:
+    image: nginx
+    ports:
+      - "8080:80"
+  redis:
+    image: "redis"
+    ports:
+      - 6379:6379
+
+
+No diretório do projeto, inicie seu aplicativo executando docker compose up
+
+    docker compose up
+
+Remover os containers criados
+    docker compose down    
+
+
+
+https://docs.docker.com/compose/gettingstarted/

@@ -1,0 +1,41 @@
+O Docker executa processos em contêineres isolados. Um contêiner é um processo que é executado em um host. O host pode ser local ou remoto. Quando um operador executa docker run, o processo de contêiner que é executado é isolado, pois possui seu próprio sistema de arquivos, sua própria rede e sua própria árvore de processos isolada separada do host.
+
+
+docker run [OPTIONS] IMAGE[:TAG]
+
+O docker run deve especificar uma IMAGEM para o contêiner. 
+
+Definições:
+Execução em primeiro ou segundo plano
+Identificação do container
+Configurações de rede
+Restrições de tempo de execução na CPU e na memória
+
+
+Criar container em primeiro plano
+docker run nginx
+
+Criar container em segundo plano (background)
+docker run -d nginx
+
+Visualizandos os containers
+docker container ls
+
+Removendo container
+docker container rm id-do-container
+
+Expondo a porta 80
+docker run -d -p 80:80 nginx
+
+Nomenando um container
+docker run --name container-nginx -d -p 80:80 nginx
+
+Mapeando um volume no container
+docker run -v /home/vagrant/html:/usr/share/nginx/html --name container-nginx -d -p 80:80 nginx
+
+Limitando recursos
+docker run -m 1GB -v /home/vagrant/html:/usr/share/nginx/html --name container-nginx -d -p 80:80 nginx
+
+
+Executando comandos no container
+docker exec -it id-do-container /bin/bash
